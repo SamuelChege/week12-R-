@@ -1,10 +1,12 @@
+---
+title: "week12ip"
+output: html_document
+---
+
 ### a) Specifying the Data Analytic Question
 
-# A Kenyan entrepreneur has created an online cryptography course and would want to advertise it
-# on her blog. She currently targets audiences originating from various countries. In the past,
-# she ran ads to advertise a related course on the same blog and collected data in the process.
-# She would now like to employ your services as a Data Science Consultant to help her identify
-# which individuals are most likely to click on her ads. 
+
+\A Kenyan entrepreneur has created an online cryptography course and would want to advertise it on her blog. She currently targets audiences originating from various countries. In the past, she ran ads to advertise a related course on the same blog and collected data in the process.She would now like to employ your services as a Data Science Consultant to help her identify which individuals are most likely to click on her ads. 
 
 ### b) Defining the Metric for Success
 
@@ -19,7 +21,7 @@
 
 *   upload and read our csv files
 *   clean our dataset
-*   perfom EDA
+*   perform EDA
 
 ### e) Data Relevance
 
@@ -38,85 +40,132 @@ it has the following columns
 'Clicked.on.Ad'
 
 
-
-
-
-
 #reading the csv file
-
+```{r}
 
 head(advertising)
+```
 
 #changing to dataframe
+```{r}
 dt <- data.frame(advertising)
 head(dt)
+```
 
 #checking for missing data
+```{r}
 colSums(is.na(dt))
 #there is no missing data
+```
 
 #checking for outliers
-boxplot(dt$Daily.Time.Spent.on.Site)
-
+```{r}
 boxplot(dt$Age)
+```
 
+```{r}
+boxplot(dt$Daily.Time.Spent.on.Site)
+```
+
+```{r}
 boxplot(dt$Area.Income)
 # it has some outlier on the lower
+```
 
+```{r}
 boxplot(dt$Daily.Internet.Usage)
+```
 
+```{r}
 boxplot(dt$Clicked.on.Ad)
 
+```
+
+
+```{r}
 #Checking for duplicates
 #duplicates <- dt[duplicated(dt),]
 #duplicates
 anyDuplicated(dt)
 #we have no duplicates in our data
+```
 
+```{r}
 #Checking for unique values
 #unique.topicline <- unique(dt$Ad.Topic.Line)
 #unique.topicline
+```
 
+```{r}
 #getting our data description
 summary(dt)
+```
+
 
 #univariate analysis
-
+```{r}
 daily.time <- dt$Daily.Time.Spent.on.Site
 daily.time.frequency <- table(daily.time)
 barplot(daily.time.frequency)
+```
 
+```{r}
 age <- dt$Age
 age.frequency <- table(age)
 barplot(age.frequency)
+```
 
+```{r}
 daily.internet <- dt$Daily.Internet.Usage
 daily.internet.frequency <- table(daily.internet)
 barplot(daily.internet.frequency)
+```
 
+```{r}
 gender <- dt$Male
 gender.frequency <- table(gender)
 barplot(gender.frequency)
+```
 
+```{r}
 ad.click <- dt$Clicked.on.Ad
 ad.click.frequency <- table(ad.click)
 barplot(ad.click.frequency)
+```
 
 #histograms
+```{r}
 hist(dt$Daily.Time.Spent.on.Site)
+```
+
+```{r}
 hist(dt$Age)
+```
+
+```{r}
 hist(dt$Area.Income)
+```
+
+
+```{r}
 hist(dt$Daily.Internet.Usage)
+```
+
 
 #Bivariate analysis
+
 #checking covariance
+
+```{r}
 dailyTime <- dt$Daily.Time.Spent.on.Site
 age <- dt$Age
 areaIncome <- dt$Area.Income
 dailyInternet <- dt$Daily.Internet.Usage
 gender <- dt$Male
 adClick <- dt$Clicked.on.Ad
+```
 
+```{r}
 cor(dailyTime, age)
 cor(dailyTime, areaIncome)
 cor(dailyTime, dailyInternet)
@@ -136,30 +185,36 @@ cor(dailyInternet, gender)
 cor(dailyInternet, adClick)
 
 cor(gender, adClick)
+```
 
 #scatter plots
-
+```{r}
 plot(dt$Daily.Time.Spent.on.Site, dt$Age, xlab="Daily Time Spent", ylab="Age")
+```
 
+```{r}
 plot(dt$Daily.Time.Spent.on.Site, dt$Daily.Internet.Usage, xlab="Daily Time Spent", ylab="Daily Internet Usage")
+```
 
+```{r}
 plot(dt$Daily.Time.Spent.on.Site, dt$Area.Income, xlab="Daily Time Spent", ylab="Area Income")
+```
 
+```{r}
 plot(dt$Daily.Internet.Usage, dt$Area.Income, xlab="Daily Internet Usage", ylab="Area Income")
 
-plot(dt$Daily.Time.Spent.on.Site, dt$Clicked.on.Ad, xlab = "Daily Time Spent", ylab = "Clicking on Ad")
+```
 
-plot(dt$Age, dt$Clicked.on.Ad, xlab = "Age", ylab = "AD clicking")
-install.packages('tinytex')
-tinytex::install_tinytex()
-tinytex::reinstall_tinytex()
+```{r}
+plot(dt$Daily.Time.Spent.on.Site, dt$Clicked.on.Ad, xlab = "Daily Time Spent", ylab = "Clicking on Ad")
+```
+
+
+
 
 #conclusion
 ### young people tend to spend most of the time on site
 ### people with high income spend most of their time on the site
 ### people with high income use internet mostly
 ### clicking on ad is not determined by age
-###
-###
-###
-###
+
